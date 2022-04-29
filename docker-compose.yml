@@ -1,0 +1,55 @@
+# Use root/example as user/password credentials
+# docker-compose build --no-cache
+# https://docs.docker.com/compose/gettingstarted/
+# https://docs.docker.com/language/java/develop/
+# https://fr.acervolima.com/comment-creer-un-conteneur-java-docker/
+version: '3.3'
+services:
+  db:
+    container_name: db
+    image: mysql:latest
+    
+    ports:
+      - 3307:3306
+      
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d
+    networks:
+      currency-mysql:
+
+ 
+    environment:
+      MYSQL_ROOT_PASSWORD: Password1011%
+      MYSQL_DATABASE: EtudiantEpsi
+      MYSQL_USER: phpmyadmin
+      MYSQL_PASSWORD: Password1011%
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - db
+    ports:
+      - 8181:80
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: examplepass
+      PMA_HOST: db
+    networks:
+      currency-mysql:
+ 
+
+  web:
+    depends_on:
+      - phpmyadmin
+    build: .
+    stdin_open: true
+    tty: true
+
+    ports:
+      - 8090:8080
+networks:
+    currency-mysql:
+    
+
+    
