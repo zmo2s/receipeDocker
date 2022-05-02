@@ -20,10 +20,10 @@ public class Receipes {
       //      Thread.sleep(15000);
 Class.forName("com.mysql.cj.jdbc.Driver");  
 Connection con=DriverManager.getConnection(  
-"jdbc:mysql://db:3306/EtudiantEpsi","phpmyadmin","Password1011%"  );
+"jdbc:mysql://mysql1:3306/EtudiantEpsi","root","Password1011%"  );
 //here sonoo is database name, root is username and password  
 Statement stmt=con.createStatement();  
-            int rs=stmt.executeUpdate("INSERT INTO `Cours` (`idCours`, `nom`, `ProfesseursEPSI_idProfesseursEPSI`) VALUES ('2', 'henri', '2');");  
+           int rs=stmt.executeUpdate("INSERT INTO `Cours` (`idCours`, `nom`, `ProfesseursEPSI_idProfesseursEPSI`) VALUES ('2', 'henri', '2');");  
 
 con.close();  
 }catch(Exception e){ System.out.println(e);}  

@@ -7,19 +7,26 @@ version: '3.3'
 
 
 
+networks:
+  foo:
+
 services:
   db:
     
     image: mysql:latest
-    hostname : db
+    container_name: mysql1
+   
  
-    
+    hostname: 0.0.0.0
     ports:
       - 3306:3306
+    expose:
+      - 3306
       
     volumes:
       - ./dump.sql:/docker-entrypoint-initdb.d
-    network_mode: bridge
+    networks:
+      - foo
   
  
     environment:
@@ -42,15 +49,16 @@ services:
       PMA_HOST: db
     depends_on:
       - db
-    network_mode: bridge
+    networks:
+      - foo
 
 
   web:
     depends_on:
       - db
-    restart: on-failure
+    restart: always
   
-
+    hostname: 0.0.0.0
     
     build: .
     stdin_open: true
@@ -58,7 +66,8 @@ services:
 
     ports:
       - 8090:8080
-    network_mode: bridge
+    networks:
+      - foo
     
 
     
