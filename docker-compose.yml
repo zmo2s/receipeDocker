@@ -4,24 +4,42 @@
 # https://docs.docker.com/language/java/develop/
 # https://fr.acervolima.com/comment-creer-un-conteneur-java-docker/
 version: '3.3'
+
+
+
+networks:
+  foo:
+
 services:
   db:
-    container_name: db
-    image: mysql:latest
     
+    image: mysql:latest
+    container_name: mysql1
+   
+ 
+    hostname: 0.0.0.0
     ports:
-      - 3307:3306
+      - 3306:3306
+    expose:
+      - 3306
       
     volumes:
       - ./dump.sql:/docker-entrypoint-initdb.d
+<<<<<<< HEAD
 
 
+=======
+    networks:
+      - foo
+  
+>>>>>>> 209941ed38ec35f353da02121f7fc85cc57ad5ca
  
     environment:
       MYSQL_ROOT_PASSWORD: Password1011%
       MYSQL_DATABASE: EtudiantEpsi
       MYSQL_USER: phpmyadmin
       MYSQL_PASSWORD: Password1011%
+
 
 
   phpmyadmin:
@@ -34,19 +52,36 @@ services:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: examplepass
       PMA_HOST: db
+<<<<<<< HEAD
 
  
+=======
+    depends_on:
+      - db
+    networks:
+      - foo
+
+>>>>>>> 209941ed38ec35f353da02121f7fc85cc57ad5ca
 
   web:
     depends_on:
-      - phpmyadmin
+      - db
+    restart: always
+  
+    hostname: 0.0.0.0
+    
     build: .
     stdin_open: true
     tty: true
 
     ports:
       - 8090:8080
+<<<<<<< HEAD
 
+=======
+    networks:
+      - foo
+>>>>>>> 209941ed38ec35f353da02121f7fc85cc57ad5ca
     
 
     
