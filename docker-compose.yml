@@ -14,8 +14,7 @@ services:
       
     volumes:
       - ./dump.sql:/docker-entrypoint-initdb.d
-    networks:
-      currency-mysql:
+
 
  
     environment:
@@ -35,8 +34,7 @@ services:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: examplepass
       PMA_HOST: db
-    networks:
-      currency-mysql:
+
  
 
   web:
@@ -48,8 +46,7 @@ services:
 
     ports:
       - 8090:8080
-networks:
-    currency-mysql:
+
     
 
     

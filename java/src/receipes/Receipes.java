@@ -17,10 +17,10 @@ public class Receipes {
     public static void main(String[] args) {
        
         try{  
-            Thread.sleep(15000);
-Class.forName("com.mysql.jdbc.Driver");  
+          //  Thread.sleep(15000);
+Class.forName("com.mysql.cj.jdbc.Driver");  
 Connection con=DriverManager.getConnection(  
-"jdbc:mysql://db:3307/EtudiantEpsi","phpmyadmin","Password1011%"  );
+"jdbc:mysql://db:3306/EtudiantEpsi","phpmyadmin","Password1011%"  );
 //here sonoo is database name, root is username and password  
 Statement stmt=con.createStatement();  
             int rs=stmt.executeUpdate("INSERT INTO `Cours` (`idCours`, `nom`, `ProfesseursEPSI_idProfesseursEPSI`) VALUES ('2', 'henri', '2');");  
